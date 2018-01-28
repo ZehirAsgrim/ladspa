@@ -32,13 +32,13 @@ typedef rfftw_plan fft_plan;
 
 #define FFT_LENGTH 1024
 #define OVER_SAMP  4
-#define BANDS      15
+#define BANDS      10
 
 
 float bands[BANDS] =
-  { 50.00f, 100.00f, 155.56f, 220.00f, 311.13f,
-    440.00f, 622.25f, 880.00f, 1244.51f, 1760.00f, 2489.02f,
-    3519.95, 4978.04f, 9956.08f, 19912.16f };
+  { 32.00f, 64.00f, 125.00f, 250.00f, 500.00f, 1000.00f, 2000.00f, 4000.00f, 8000.00f, 16000.00f};
+    
+   
 		]]></code>
 	</global>
 
@@ -125,7 +125,7 @@ fifo_pos = 0;
 int i, bin, gain_idx;
 float gains[BANDS + 1] =
   { band_1, band_2, band_3, band_4, band_5, band_6, band_7, band_8, band_9,
-    band_10, band_11, band_12, band_13, band_14, band_15, 0.0f };
+    band_10, 0.0f };
 float coefs[FFT_LENGTH / 2];
 unsigned long pos;
 
@@ -209,79 +209,55 @@ plugin_data->fifo_pos = fifo_pos;
 		]]></callback>
 
 		<port label="band_1" dir="input" type="control" hint="default_0">
-			<name>50Hz gain (low shelving)</name>
+			<name>36Hz gain (low shelving)</name>
 			<range min="-70" max="+30"/>
 		</port>
 
 		<port label="band_2" dir="input" type="control" hint="default_0">
-			<name>100Hz gain</name>
+			<name>64Hz gain</name>
 			<range min="-70" max="+30"/>
 		</port>
 
 		<port label="band_3" dir="input" type="control" hint="default_0">
-			<name>156Hz gain</name>
+			<name>125Hz gain</name>
 			<range min="-70" max="+30"/>
 		</port>
 
 		<port label="band_4" dir="input" type="control" hint="default_0">
-			<name>220Hz gain</name>
+			<name>250Hz gain</name>
 			<range min="-70" max="+30"/>
 		</port>
 
 		<port label="band_5" dir="input" type="control" hint="default_0">
-			<name>311Hz gain</name>
+			<name>500Hz gain</name>
 			<range min="-70" max="+30"/>
 		</port>
 
 		<port label="band_6" dir="input" type="control" hint="default_0">
-			<name>440Hz gain</name>
+			<name>1000Hz gain</name>
 			<range min="-70" max="+30"/>
 		</port>
 
 		<port label="band_7" dir="input" type="control" hint="default_0">
-			<name>622Hz gain</name>
+			<name>2000Hz gain</name>
 			<range min="-70" max="+30"/>
 		</port>
 
 		<port label="band_8" dir="input" type="control" hint="default_0">
-			<name>880Hz gain</name>
+			<name>4000Hz gain</name>
 			<range min="-70" max="+30"/>
 		</port>
 
 		<port label="band_9" dir="input" type="control" hint="default_0">
-			<name>1250Hz gain</name>
+			<name>8000Hz gain</name>
 			<range min="-70" max="+30"/>
 		</port>
 
 		<port label="band_10" dir="input" type="control" hint="default_0">
-			<name>1750Hz gain</name>
+			<name>16000Hz gain</name>
 			<range min="-70" max="+30"/>
 		</port>
 
-		<port label="band_11" dir="input" type="control" hint="default_0">
-			<name>2500Hz gain</name>
-			<range min="-70" max="+30"/>
-		</port>
-
-		<port label="band_12" dir="input" type="control" hint="default_0">
-			<name>3500Hz gain</name>
-			<range min="-70" max="+30"/>
-		</port>
-
-                <port label="band_13" dir="input" type="control" hint="default_0">
-                        <name>5000Hz gain</name>
-                        <range min="-70" max="+30"/>
-                </port>
-
-                <port label="band_14" dir="input" type="control" hint="default_0">
-                        <name>10000Hz gain</name>
-                        <range min="-70" max="+30"/>
-                </port>
-
-                <port label="band_15" dir="input" type="control" hint="default_0">
-                        <name>20000Hz gain</name>
-                        <range min="-70" max="+30"/>
-                </port>
 
 		<port label="input" dir="input" type="audio">
 			<name>Input</name>
